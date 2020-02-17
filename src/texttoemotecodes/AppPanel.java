@@ -17,15 +17,14 @@ public class AppPanel extends JPanel {
     private JTextArea newArea;
     private JScrollPane newPane;
     private ButtonListener listen;
-    private Logic logic;
-    private GridBagConstraints c;
+    private GridBagConstraints gbc;
     
     public AppPanel() {
         listen = new ButtonListener();
         
-        c = new GridBagConstraints();
-        c.insets = new Insets(20, 20, 20, 20);
-        c.fill = GridBagConstraints.BOTH;
+        gbc = new GridBagConstraints();
+        gbc.insets = new Insets(20, 20, 20, 20);
+        gbc.fill = GridBagConstraints.BOTH;
         
         setLayout(new BorderLayout());
         
@@ -33,46 +32,44 @@ public class AppPanel extends JPanel {
         panel1.setLayout(new GridBagLayout());
         
         convertLabel = new JLabel("Message to convert:");
-        c.gridx = 0;
-        c.gridy = 0;
-        panel1.add(convertLabel, c);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel1.add(convertLabel, gbc);
         
         messageField = new JTextField();
-        c.gridx = 1;
-        c.gridy = 0;
-        panel1.add(messageField, c);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panel1.add(messageField, gbc);
         
         newLabel = new JLabel("Converted message:");
-        c.gridx = 0;
-        c.gridy = 1;
-        panel1.add(newLabel, c);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel1.add(newLabel, gbc);
         
         newArea = new JTextArea();
         newArea.setEditable(false);
         newArea.setLineWrap(true);
         newPane = new JScrollPane(newArea);
-        c.gridx = 1;
-        c.gridy = 1;
-        c.weightx = 1.0;
-        c.weighty = 1.0;
-        panel1.add(newPane, c);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        panel1.add(newPane, gbc);
         
         convertButton = new JButton("Convert");
-        c.gridx = 0;
-        c.gridy = 2;
-        c.weightx = 0.0;
-        c.weighty = 0.0;
-        c.fill = GridBagConstraints.NONE;
-        panel1.add(convertButton, c);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.0;
+        gbc.weighty = 0.0;
+        gbc.fill = GridBagConstraints.NONE;
+        panel1.add(convertButton, gbc);
         
         copyButton = new JButton("Copy message");
-        c.gridx = 1;
-        c.gridy = 2;
-        panel1.add(copyButton, c);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel1.add(copyButton, gbc);
         
         add(panel1, BorderLayout.CENTER);
-        
-        logic = new Logic();
         
         convertButton.addActionListener(listen);
         copyButton.addActionListener(listen);
@@ -81,7 +78,7 @@ public class AppPanel extends JPanel {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == convertButton) {
-                newArea.setText(logic.toEmotes(messageField.getText()));
+                newArea.setText(Convert.toEmotes(messageField.getText()));
             }
             
             if (e.getSource() == copyButton) {
